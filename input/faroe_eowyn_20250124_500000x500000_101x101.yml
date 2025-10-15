@@ -1,0 +1,80 @@
+
+# large grid necessary for acceptable quality of the analytical solution
+nx: 101
+xmin: 355000.0 
+xmax: 855000.0
+bcx_kind: 0 # prescribed 
+
+ny: 101
+ymin: 6620000.0
+ymax: 7120000.0
+bcy_kind: 0 # prescribed
+
+nz: 96
+zmin: &zmin 0.0
+zmax: &zmax 20000.0
+
+dt: 10.0
+
+model_starttime: 0.0
+model_endtime: 72000.0
+
+tout_info: 100.0
+outer_nstep: 120
+
+loutput_data: True
+output_directory: /projappl/project_465000527/olindber/data/pmap-les/faroe_eowyn_20250124/output
+output_dimorder: xyz
+output_fields:
+  - uvel
+  - exner_total
+  - density
+  - theta_total
+
+isetup:
+  testcase: faroe_eowyn_20250124
+
+total_fields: &total_specification
+  velocity_definition: uniform
+  velocity_x: 0.0
+  velocity_y: 10.0
+  velocity_z: 0.0
+  thermodynamic_definition: clark-farley
+  stb00: 3.569660383515268e-5 # 0.01871 s-1
+  t00: 273.16
+
+ambient_fields: *total_specification
+relaxation_fields: *total_specification
+
+define_horizontal_coordinates:
+  func: pmap.geometry.horizontal_coordinates.identity
+
+define_orography: &orography
+  func: pmap.geometry.orography.from_file
+  args:
+    filename: /projappl/project_465000527/olindber/data/pmap-les/faroe_eowyn_20250124/input/faroe_dem_500000x500000_101x101.nc
+
+define_vertical_coordinate_stretching:
+  func: pmap.geometry.vertical_coordinate_stretching.tanh
+  args:
+    dz_near_surface: 150.0
+
+define_vertical_coordinate:
+  func: pmap.geometry.vertical_coordinate.btf_levels
+
+absorber:
+  wtop: True
+  wtop_tscale: 15.0
+  wtop_depth: 8000.0
+
+  absorbux: True
+  absorbuz: True
+  absorbth: True
+
+  xboundaries: True
+  tscalex: 300.0
+  widthx: 5000.0
+
+  yboundaries: True
+  tscaley: 300.0
+  widthy: 5000.0
