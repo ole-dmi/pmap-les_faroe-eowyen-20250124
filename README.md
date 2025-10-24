@@ -18,6 +18,7 @@ uv run copernicus_dem_faroe_plot.py
 ```
 
 The plot should look like this:
+
 ![data/copernicus_dem_faroe.png](assets/copernicus_dem_faroe.png)
 
 ### 2. Extract and save topography for pmap-les 
@@ -32,7 +33,8 @@ Now interpolate the elevation to the pmap grid and save to netcdf. The configura
 uv run copernicus_dem_faroe_to_pmap.py  
 ```
 It saves the netcdf files and a png of the domain to `data/pmap_les_orography_faroe` e.g.: 
-![data/pmap_les_orography_faroe/faroe_dem_500000x500000_1001x1001.png](data/pmap_les_orography_faroe/faroe_dem_500000x500000_1001x1001.png)
+
+![data/pmap_les_orography_faroe/faroe_dem_500000x500000_1001x1001.png](assets/faroe_dem_500000x500000_1001x1001.png)
 
 PMAP 2025-01-24 Eowyn storm setup
 
