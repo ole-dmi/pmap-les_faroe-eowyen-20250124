@@ -1,0 +1,12 @@
+geotiff:
+  input_path: "data/copernicus_dem_faroe/"
+
+netcdf:
+  x0: 605000
+  y0: 6870000
+  Lx: 500000
+  Ly: 500000
+  nx: 1001
+  ny: 1001
+  output_path: "data/pmap_les_orography_faroe/"
+  filename: "faroe_dem_{Lx}x{Ly}_{nx}x{ny}.nc"

@@ -10,7 +10,7 @@ fig, ax = plt.subplots()
 
 
 def animate(i):
-    ds = xr.open_dataset(f"data_{i}.nc")
+    ds = xr.open_dataset(f"output/500000x500000_251x251/data_{i}.nc")
 
     uvelx = ds['uvelx'].isel(time=0)
     plot = plt.pcolormesh(uvelx[:,:,0], vmin=15, vmax=25)
