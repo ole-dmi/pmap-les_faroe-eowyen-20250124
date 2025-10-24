@@ -25,8 +25,9 @@ for i in range(0,94,1):
     print(u.shape)
     print(v.shape)
     print(w.shape)
-    
-    plt.pcolormesh(x,y,vel,cmap="coolwarm",vmin=5,vmax=15)
+    plt.figure() 
+    plt.contourf(x,y,vel,cmap="coolwarm",vmin=5,vmax=15,levels=11)
+    plt.contour (x,y,vel,vmin=5,vmax=15,levels=11, colors="black",linewidths=0.1)
     
     filename = f"{input_dir}/data_{i}.png"
 
