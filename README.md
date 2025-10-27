@@ -8,7 +8,7 @@ Start by downloading the Copernicus DEM tiles covering Faroe Islands:
 ./copernicus_dem_faroe_download.sh  
 ```
 
-The scripts creates and downloads the `TIF` files to `data/copernicus_dem_faroe/`
+The scripts creates and downloads the `TIF` files to `data/copernicus_dem_faroe/`. Positions of the cells in the DEM tiles are given in `ED50 / UTM zone 29N (EPSG:23029)` coordinates, see [https://epsg.io/23029](https://epsg.io/23029).
 
 
 Plot the tiles to check that they are downloaded alright:
@@ -21,7 +21,7 @@ The plot should look like this:
 
 ![data/copernicus_dem_faroe.png](assets/copernicus_dem_faroe.png)
 
-### 2. Extract and save topography for pmap-les 
+### 2. Extract and save orography to a netcdf file 
 
 Now interpolate the elevation to the pmap grid and save to netcdf. The configuration of the interpolation is in `config/config.yml`, where the interpolation parameters are:
 
@@ -32,7 +32,7 @@ Now interpolate the elevation to the pmap grid and save to netcdf. The configura
 ```
 uv run copernicus_dem_faroe_to_pmap.py  
 ```
-It saves the netcdf files and a png of the domain to `data/pmap_les_orography_faroe` e.g.: 
+It saves the netcdf file and a png of the domain to e.g. `data/pmap_les_orography_faroe/faroe_dem_500000x500000_1001x1001.png`: 
 
 ![data/pmap_les_orography_faroe/faroe_dem_500000x500000_1001x1001.png](assets/faroe_dem_500000x500000_1001x1001.png)
 
