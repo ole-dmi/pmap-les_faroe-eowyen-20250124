@@ -9,4 +9,4 @@ netcdf:
   nx: 1001
   ny: 1001
   output_path: "data/pmap_les_orography_faroe/"
-  filename: "faroe_dem_{Lx}x{Ly}_{nx}x{ny}.nc"
+
