@@ -163,7 +163,7 @@ def main() -> int:
         with open("config/config.yaml") as f:
             cfg_netcdf = yaml.safe_load(f)["netcdf"]
             
-        filename    = str(f"faroe_dem_{Lx}x{Ly}_{nx}x{ny}.nc")
+        filename    = str(f"faroe_dem_{int(Lx)}x{int(Ly)}_{nx}x{ny}.nc")
         output_file = Path(cfg_netcdf["output_path"]) / filename
 
         output_file.parent.mkdir(parents=True, exist_ok=True)
