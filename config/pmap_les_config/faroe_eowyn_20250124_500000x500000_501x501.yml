@@ -23,7 +23,7 @@ tout_info: 100.0
 outer_nstep: 120
 
 loutput_data: True
-output_directory: /projappl/project_465000527/olindber/data/pmap-les/pmap-les_faroe-eowyen-20250124/output/500000x500000_501x501
+output_directory: output/500000x500000_501x501
 output_dimorder: xyz
 output_fields:
   - uvel
@@ -52,7 +52,7 @@ define_horizontal_coordinates:
 define_orography: &orography
   func: pmap.geometry.orography.from_file
   args:
-    filename: /projappl/project_465000527/olindber/data/pmap-les/pmap-les_faroe-eowyen-20250124/input/faroe_dem_500000x500000_501x501.nc
+    filename: input/faroe_dem_500000x500000_501x501.nc
 
 define_vertical_coordinate_stretching:
   func: pmap.geometry.vertical_coordinate_stretching.tanh
