@@ -52,7 +52,7 @@ define_horizontal_coordinates:
 define_orography: &orography
   func: pmap.geometry.orography.from_file
   args:
-    filename: input/faroe_dem_500000x500000_5001x5001.nc
+    filename: data/pmap_les_orography_faroe/faroe_dem_500000x500000_5001x5001.nc
 
 define_vertical_coordinate_stretching:
   func: pmap.geometry.vertical_coordinate_stretching.tanh

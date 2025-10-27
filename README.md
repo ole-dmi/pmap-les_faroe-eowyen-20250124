@@ -92,21 +92,13 @@ and run all the cases:
 ./pmap_run_all.sh $PMAP_FAROE_EOWYN $PMAP_DIR
 ```
 
-PMAP 2025-01-24 Eowyn storm setup
+### 4. TODO in readme
 
-Setting limits and spatial subdivision for the physical bounding box. 
+Describe whats modified in the pmap configuration files
+- Setting limits and spatial subdivision for the physical bounding box. 
+- Reading in the topography from the netcdf file
+- Setting constant wind boundary conditions
 
-Reading in the topography from the netcdf file
-
-Setting constant wind boundary conditions
-
-Running
-
-Movie
-
-
-
-
-faroe_eowyn_20250124_plot.py  
-faroe_eowyn_20250124_animate.py  
-geotiff_dem.py                
+Post-processing:
+- faroe_eowyn_20250124_plot.py  
+- faroe_eowyn_20250124_animate.py  
