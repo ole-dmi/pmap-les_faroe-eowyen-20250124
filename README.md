@@ -32,9 +32,37 @@ Now interpolate the elevation to the pmap grid and save to netcdf. The configura
 ```
 uv run copernicus_dem_faroe_to_pmap.py  
 ```
-It saves the netcdf file and a png of the domain to e.g. `data/pmap_les_orography_faroe/faroe_dem_500000x500000_1001x1001.png`: 
+It saves the netcdf file and a png of the domain to e.g. `data/pmap_les_orography_faroe/faroe_dem_500000x500000_1001x1001.nc` and `data/pmap_les_orography_faroe/faroe_dem_500000x500000_1001x1001.png`: 
 
 ![data/pmap_les_orography_faroe/faroe_dem_500000x500000_1001x1001.png](assets/faroe_dem_500000x500000_1001x1001.png)
+
+
+### 3. Running PMAP for the Eowyn 2025/01/24 storm around Faroe Island 
+
+Now the orography data has been prepared we can start running pmap.
+
+Assuming the pmap is installed in the folder `$PMAP_DIR` e.g.:
+```
+export PMAP_DIR=/users/olindber/PMAP-LES-shared
+```
+
+and this repository has been checked out to `$PMAP_FAROE_EOWYN` e.g.:
+
+```
+export PMAP_FAROE_EOWYN=/projappl/project_465000527/olindber/data/pmap-les/pmap-les_faroe-eowyen-20250124
+```
+
+go to `$PMAP_FAROE_EOWYN`:
+
+```
+cd $PMAP_FAROE_EOWYN
+```
+
+and run all the cases:
+
+```
+./pmap_run_all.sh $PMAP_FAROE_EOWYN $PMAP_DIR
+```
 
 PMAP 2025-01-24 Eowyn storm setup
 
