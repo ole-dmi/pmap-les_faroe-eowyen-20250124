@@ -2,7 +2,36 @@
 
 ### 1. Download Copernicus digital elevation model (DEM)
 
-Start by downloading the Copernicus DEM tiles covering Faroe Islands:
+
+The available DEM tiles from  Copernicus digital elevation model (DEM) is seen here:
+
+```
+https://s3.waw3-1.cloudferro.com/swift/v1/portal_uploads_prod/GEO1988-CopernicusDEM-RP-002_GridFile_I6.0.shp_08.2024.zip
+```
+
+s3 key and secret must be obtained from Copernicus Data Space:
+
+`https://eodata-s3keysmanager.dataspace.copernicus.eu/panel/s3-credentials`
+
+s3cmd configuration file (~/.s3cfg) should look like this:
+```
+[default]
+access_key = <ACCESS_KEY>
+host_base = eodata.dataspace.copernicus.eu
+host_bucket = eodata.dataspace.copernicus.eu
+human_readable_sizes = False
+secret_key = <SECRET_KEY>
+use_https = true
+check_ssl_certificate = true
+```
+
+Note: 's3cmd' must be available, on 'LUMI' its a part of the `lumio` module:
+
+```
+module load lumio
+```
+
+With s3 configured, start by downloading the Copernicus DEM tiles covering Faroe Islands:
 
 ```
 ./copernicus_dem_faroe_download.sh  

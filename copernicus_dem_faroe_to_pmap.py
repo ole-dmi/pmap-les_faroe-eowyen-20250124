@@ -106,79 +106,81 @@ def main() -> int:
     # Note: that the following coordinates are in the target projection (ED50 / UTM zone 29N)
     # and NOT in lat,lon
 
-    # Faroe Islands approx center in ED50 / UTM zone 29N:
-    x0 = cfg.netcdf.x0
-    y0 = cfg.netcdf.y0
-    Lx = cfg.netcdf.Lx
-    Ly = cfg.netcdf.Ly
-    nx = cfg.netcdf.nx
-    ny = cfg.netcdf.ny
+    logger.info("Sampling DEM on target grid ...")
+    num_cells = [101,251,501,1001,2501,5001]
+    for nx,ny in zip(num_cells,num_cells):
+        logger.info(f"  nx={nx} ny={ny}")
 
-    dx = Lx/(nx-1)
-    dy = Ly/(ny-1)
+        # Faroe Islands approx center in ED50 / UTM zone 29N:
+        x0 = cfg.netcdf.x0
+        y0 = cfg.netcdf.y0
+        Lx = cfg.netcdf.Lx
+        Ly = cfg.netcdf.Ly
 
-    xmin = x0 - Lx/2
-    xmax = x0 + Lx/2
-    ymin = y0 - Ly/2
-    ymax = y0 + Ly/2
+        dx = Lx/(nx-1)
+        dy = Ly/(ny-1)
 
-    logger.info(f"Area of interest (ED50 / UTM zone 29N):")
-    logger.info(f"Center       : {x0}, {y0} m")
-    logger.info(f"Size         : {Lx} x {Ly} m")
-    logger.info(f"Grid         : {nx} x {ny} points")
-    logger.info(f"x            : {xmin} to {xmax} m")
-    logger.info(f"y            : {ymin} to {ymax} m")
-    logger.info(f"Grid spacing : {dx} x {dy} m")
+        xmin = x0 - Lx/2
+        xmax = x0 + Lx/2
+        ymin = y0 - Ly/2
+        ymax = y0 + Ly/2
 
-    xv1d = np.linspace(xmin, xmax, nx)
-    yv1d = np.linspace(ymin, ymax, ny)
+        logger.info(f"Area of interest (ED50 / UTM zone 29N):")
+        logger.info(f"Center       : {x0}, {y0} m")
+        logger.info(f"Size         : {Lx} x {Ly} m")
+        logger.info(f"Grid         : {nx} x {ny} points")
+        logger.info(f"x            : {xmin} to {xmax} m")
+        logger.info(f"y            : {ymin} to {ymax} m")
+        logger.info(f"Grid spacing : {dx} x {dy} m")
+
+        xv1d = np.linspace(xmin, xmax, nx)
+        yv1d = np.linspace(ymin, ymax, ny)
 
 
-    xv, yv      = np.meshgrid(xv1d, yv1d)
-    zv          = np.zeros((ny,nx), dtype=np.float32)
-    transformer = Transformer.from_crs("ED50 / UTM zone 29N","EPSG:4326", always_xy=True)
-    lon, lat    = transformer.transform(xv, yv)
-    zv          = dem_interp((lat, lon))
+        xv, yv      = np.meshgrid(xv1d, yv1d)
+        zv          = np.zeros((ny,nx), dtype=np.float32)
+        transformer = Transformer.from_crs("ED50 / UTM zone 29N","EPSG:4326", always_xy=True)
+        lon, lat    = transformer.transform(xv, yv)
+        zv          = dem_interp((lat, lon))
 
-    logger.info(f"Sampled DEM shape: {zv.shape}")
+        logger.info(f"Sampled DEM shape: {zv.shape}")
 
-    #-----------------------------------------------------------------------------#
-    # Save the DEM to a NetCDF file
-    #-----------------------------------------------------------------------------#
-    logger.info("Saving DEM to NetCDF file ...")
-    # Create DataArray
-    da = xr.DataArray(
-        data=zv,
-        dims=("y", "x"),
-        coords={
-            "x": (("y", "x"), xv),
-            "y": (("y", "x"), yv),
-        },
-        name="orog"
-        )
+        #-----------------------------------------------------------------------------#
+        # Save the DEM to a NetCDF file
+        #-----------------------------------------------------------------------------#
+        logger.info("Saving DEM to NetCDF file ...")
+        # Create DataArray
+        da = xr.DataArray(
+            data=zv,
+            dims=("y", "x"),
+            coords={
+                "x": (("y", "x"), xv),
+                "y": (("y", "x"), yv),
+            },
+            name="orog"
+            )
 
-    with open("config/config.yaml") as f:
-        cfg_netcdf = yaml.safe_load(f)["netcdf"]
+        with open("config/config.yaml") as f:
+            cfg_netcdf = yaml.safe_load(f)["netcdf"]
 
-    filename    = cfg_netcdf["filename"].format(**cfg_netcdf)
-    output_file = Path(cfg_netcdf["output_path"]) / filename
+        filename    = cfg_netcdf["filename"].format(**cfg_netcdf)
+        output_file = Path(cfg_netcdf["output_path"]) / filename
 
-    output_file.parent.mkdir(parents=True, exist_ok=True)
-    da.to_netcdf(path=output_file)
-    print(f"✅ Saved to {output_file}")
+        output_file.parent.mkdir(parents=True, exist_ok=True)
+        da.to_netcdf(path=output_file)
+        logger.info(f"✅ Saved to {output_file}")
 
-    #-----------------------------------------------------------------------------#
-    # Plot the DEM
-    # ----------------------------------------------------------------------------##
-    logger.info("Plotting ...")            
-    plt.pcolormesh(xv,yv,zv,cmap='terrain',vmin=-10,vmax=800)
-    plt.colorbar(label='Elevation (m)')
-    plt.title(f'Faroe Islands (ED50 / UTM zone 29N) nx={nx} ny={ny}')
-    plt.xlabel('West-East (m)')
-    plt.ylabel('South-North (m)')
-    plt.axis('equal')  
-    plt.savefig(output_file.with_suffix('.png'), dpi=300)
-    #plt.show()
+        #-----------------------------------------------------------------------------#
+        # Plot the DEM
+        # ----------------------------------------------------------------------------##
+        logger.info("Plotting ...")            
+        plt.pcolormesh(xv,yv,zv,cmap='terrain',vmin=-10,vmax=800)
+        plt.colorbar(label='Elevation (m)')
+        plt.title(f'Faroe Islands (ED50 / UTM zone 29N) nx={nx} ny={ny}')
+        plt.xlabel('West-East (m)')
+        plt.ylabel('South-North (m)')
+        plt.axis('equal')  
+        plt.savefig(output_file.with_suffix('.png'), dpi=300)
 
     return 0
 
