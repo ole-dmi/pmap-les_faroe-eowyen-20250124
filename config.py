@@ -13,8 +13,6 @@ class NetCdfConfig(BaseModel):
     y0: float
     Lx: float
     Ly: float
-    nx: int
-    ny: int
     output_path: Path
 
 class AppConfig(BaseModel):

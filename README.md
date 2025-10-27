@@ -56,7 +56,6 @@ Now interpolate the elevation to the pmap grid and save to netcdf. The configura
 
 - `x0,y0`: Domain center in ED50 / UTM zone 29N (EPSG:23029) coordinates.
 - `Lx,Ly`: Domain side lengths in ED50 / UTM zone 29N (EPSG:23029) coordinates.
-- `nx,ny`: Number of points in x and y directions.
 
 ```
 uv run copernicus_dem_faroe_to_pmap.py  
