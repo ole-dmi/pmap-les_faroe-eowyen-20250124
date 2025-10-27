@@ -16,7 +16,6 @@ class NetCdfConfig(BaseModel):
     nx: int
     ny: int
     output_path: Path
-    filename: str
 
 class AppConfig(BaseModel):
     geotiff: Annotated[
