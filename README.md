@@ -42,8 +42,6 @@ chmod +x build_hdf5.sh
 chmod +x build_netcdf.sh
 ./build_netcdf.sh
 
-./make_build_netcdf.py
-
 ./make_prepare_pmap_les.py --project-root-dir=pmap-les/ --branch=main
 . prepare_pmap_les.sh
 
