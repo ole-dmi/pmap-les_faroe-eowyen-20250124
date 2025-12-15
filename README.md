@@ -1,6 +1,6 @@
 ## PMAP-LES installation on LUMI using `hpc-scripts`
 
-This installation procedure uses the scripts from the `hpc-scripts` repository.  
+This installation procedure uses the scripts from the `hpc-scripts` repository, see https://github.com/stubbiali/hpc-scripts/.  
 
 First get an interactive allocation on dev-g
 
