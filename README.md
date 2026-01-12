@@ -1,3 +1,36 @@
+## PMAP-LES installation on ATOS 
+
+# 1: Download PMAP: 
+
+```
+git clone git@github.com:PMAP-Project/PMAP-real_cases-shared.git
+cd PMAP-real_cases-shared/
+```
+# 2: Create a virtual python environment:
+
+```
+module load python3
+python3 -m venv venv
+```
+
+# 3: Copy this slurm script into `pmap_install.sh`:
+
+```
+#!/bin/bash 
+#SBATCH --job-name=pmap_install
+#SBATCH --output=pmap_install-%J.out
+#SBATCH --error=pmap_install-%J.out
+
+module load prgenv/intel
+module load intel-mpi
+module load hdf5-parallel
+module load netcdf4
+
+source venv/bin/activate
+
+pip install -r requirements-dev-mpi.txt && pip install -e .
+```
+
 ## PMAP-LES installation on LUMI using `hpc-scripts`
 
 This installation procedure uses the scripts from the `hpc-scripts` repository.  
