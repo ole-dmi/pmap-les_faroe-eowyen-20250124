@@ -1,19 +1,19 @@
 ## PMAP-LES installation on ATOS 
 
-# 1: Download PMAP: 
+### 1: Download PMAP: 
 
 ```
 git clone git@github.com:PMAP-Project/PMAP-real_cases-shared.git
 cd PMAP-real_cases-shared/
 ```
-# 2: Create a virtual python environment:
+### 2: Create a virtual python environment:
 
 ```
 module load python3
 python3 -m venv venv
 ```
 
-# 3: Copy this slurm script into `pmap_install.sh`:
+### 3: Copy this slurm script into `pmap_install.sh`:
 
 ```
 #!/bin/bash 
