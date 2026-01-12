@@ -30,6 +30,12 @@ source venv/bin/activate
 
 pip install -r requirements-dev-mpi.txt && pip install -e .
 ```
+and run
+
+```
+sbatch pmap_install.sh
+```
+
 
 ## PMAP-LES installation on LUMI using `hpc-scripts`
 
