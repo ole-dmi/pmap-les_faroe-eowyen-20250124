@@ -1,15 +1,11 @@
 #!/bin/bash
-#SBATCH --time=12:00:00
+#SBATCH --time=48:00:00
 
-# Blueprint for transferring Eowyn PMAP data from ATOS to LUMI 
+SSH_KEY_LUMI_ATOS="/home/nhad/.ssh/lumi_transfer"  #with your LUMI ssh key on ATOS
+SOURCE_DATA_LUMI="/projappl/project_465000527/benacchi/jobs/pmap-real_cases-shared/lumi/real_cases/faroer_500m_nx1501_ny1501_DE2401202500_init06UTC/single/mpi/dacegpu/data_*.nc" # PMAP output data on ATOS
+#
+DEST_FLD_ATOS="/ec/res4/hpcperm/nhad/PMAP_LAM_evolution_task_output/500m_faroe_20250124/PMAP_real_cases_single/" # destination folder on ATOS 
+LUMI_USR="benacchi"
 
-# SSH key for lumi login on ATOS
-#ATOS_TO_LUMI_SSH_KEY=/home/nhad/.ssh/lumi_transfer
 
-# Folder with PMAP data on ATOS
-#PMAP_DATA_ATOS_FLD=/ec/project/pmap/de_330/faroer_500m_nx1501_ny1501_2401202500_init06UTC
-
-#LUMI_USR=benacchi
-#LUMI_TARGET_FLD=/projappl/project_465000527/benacchi/
-
-scp  -i $ATOS_TO_LUMI_SSH_KEY -r $PMAP_DATA_ATOS_FLD  $LUMI_USR@lumi.csc.fi:$LUMI_TARGET_FLD
+scp -i $SSH_KEY_LUMI_ATOS -r "$LUMI_USR@lumi.csc.fi:$SOURCE_DATA_LUMI" $DEST_FLD_ATOS
