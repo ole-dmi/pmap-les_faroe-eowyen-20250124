@@ -98,3 +98,7 @@ PMAP_NUM_THREADS_COMPILATION=56 GT_BACKEND=gt:gpu        srun --ntasks=1 --cpus-
 ## Cases
 
 - [Eowyn storm around the Faroe Islands, 2025-01-24](cases/faroe_eowyen_storm_20250124/README.md)
+
+## PMAP docs
+
+- Planning documents on the PMAP activity at DMI can be found at [this link](https://docs.google.com/document/d/1SxCBzM6XGty4F8ZZ-zajwRzBaCc7mPQ4uJemZXsTphA/edit?usp=sharing)
